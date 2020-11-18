@@ -1,0 +1,61 @@
+
+Bontas Carol 321CA
+
+Probleme intampinate:
+-incercare partiala de implementare a cautarii in log N
+-implementare partiala a calculului checksum 
+(am COMENTAT implementarea deoarece imi pica teste care erau corecte fara sa folosesc checksum)
+
+           
+Implementare (mai multe detalii privind campurile folosite din fiecare antet se gasesc in router.c)
+
+        sorteaza tabela de routare crescator dupa prefix iar daca prefixul este egal sorteaza crescator dupa masca
+
+         while(1)
+        {
+          primeste mesaj
+        
+         switch(tip_ethernet)
+         {
+           case tip ARP:
+           {
+	            if(tip ARP REQUEST)
+	            {
+	              transforma pachetul primit in tip ARP REPLY
+	              send
+	            }
+	            else
+	            { 
+	               // pachetul va fi de tip ARP REPLY
+	               adauga in tabela MAC-ul dat de REPLY
+	               if(coada nu e goala)
+	               {
+	                scoate din coada mesajul si il trimite (forward) cu adresa MAC data de REPLY
+	                send
+	               }
+              break
+            }
+            case tip IP:
+            {
+
+	            verifica ttl
+	            
+	            verifica daca pachetul este adresat routerului iar daca da atunci da un ICMP REPLY
+
+	            if(nu exista intrare in tabela de routare)
+	            trimite un ICMP DESTINATION HOST UNREACHABLE
+
+	           if(nu exista intrare in tabela arp)
+	           {
+	              construieste un ARP REQUEST ce e trimis la destinatie pt a afla MAC-ul
+	              pune in coada mesajul IP receptionat
+
+	              trimite ARP REQUEST
+	           }
+	           else
+	           {
+	           forward pachet IP
+	           }
+            }
+        }
+            
